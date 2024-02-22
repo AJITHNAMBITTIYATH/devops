@@ -43,19 +43,17 @@ jobs:
       - name: Pull tharuninfo/erpui:v2-154 Docker Image
         run: docker pull tharuninfo/erpui:v2-154
 
-      - name: Docker Scout Scan
+      - name: Install Scout CLI and Run Scan
         run: |
           curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
           sh install-scout.sh
           echo ${{ secrets.REPO_PWD }} | docker login -u ${{ secrets.REPO_USER }} --password-stdin
-          docker scout quickview
-          docker scout cves
+          docker scout quickview tharuninfo/erpui:v2-154
+          docker scout cves tharuninfo/erpui:v2-154
+          docker scout sarif tharuninfo/erpui:v2-154 > scout-report.sarif
           
-   sarif-file: scout-report.sarif
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        if: always()
+      - name: Upload SARIF Artifact
+        uses: actions/upload-artifact@v2
         with:
           name: docker-scout-findings
           path: scout-report.sarif
-      
