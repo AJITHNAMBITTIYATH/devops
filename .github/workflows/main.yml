@@ -52,11 +52,4 @@ jobs:
           echo ${{ secrets.REPO_PWD }} | docker login -u ${{ secrets.REPO_USER }} --password-stdin
           docker scout quickview
           docker scout cves
-          docker scout sarif tharuninfo/erpui:v2-154 > scout-report.sarif
-          
-      - name: Upload Sarif Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: docker-scout-findings
-          path: scout-report.sarif
-        
+         
