@@ -28,3 +28,23 @@ jobs:
         with:
           name: bandit-findings
           path: bandit-report.json
+
+  image_scan:
+    name: Build Image and Run Image Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker Image
+        run: docker build -f Dockerfile -t myapp:latest .
+
+      - name: Docker Scout Scan
+        run: |
+          docker run tharuninfo/erpui:v2-154 sh install-scout.sh
+          docker run tharuninfo/erpui:v2-154 docker scout quickview
+          docker run tharuninfo/erpui:v2-154 docker scout cves
