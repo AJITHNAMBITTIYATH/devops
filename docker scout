@@ -1,2 +1,15 @@
-ligds
-tharuninfo/erpui:v2-154 grafana/grafana
+name: CI
+on: [push]
+
+jobs:
+sast_scan:
+name: Run Bandit Scan
+run-on: ubuntu-latest
+
+steps:
+-name: checkout code
+uses: sctions/checkout@v2
+
+-name: set uo python
+uses: action/setup-python@v2
+with:
