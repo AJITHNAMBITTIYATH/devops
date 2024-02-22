@@ -41,7 +41,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Docker Image
-        run: tharuninfo/erpui:v2-154
+        run: tharuninfo/erpui:v2-154 grafana/grafana
 
       - name: Install Scout CLI
         run: |
