@@ -50,4 +50,12 @@ jobs:
           echo ${{ secrets.REPO_PWD }} | docker login -u ${{ secrets.REPO_USER }} --password-stdin
           docker scout quickview
           docker scout cves
+          
+   sarif-file: scout-report.sarif
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: docker-scout-findings
+          path: scout-report.sarif
       
