@@ -42,8 +42,8 @@ jobs:
         with: 
             docker_version: '20.10.7'
 
-      - name: Pull tharuninfo/erpui:v2-154 Docker Image
-        run: docker pull tharuninfo/erpui:v2-154
+      - name: Pull grafana/grafana Docker Image
+        run: docker pull grafana/grafana
 
      # - name: Docker Scout Scan
      #   run: |
